@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crazyelemon.dao.ReceiveAddressDAO">
+  <resultMap id="BaseResultMap" type="com.crazyelemon.entity.ReceiveAddress">
+    <id column="address_id" jdbcType="INTEGER" property="addressId" />
+    <result column="address_province" jdbcType="VARCHAR" property="addressProvince" />
+    <result column="address_city" jdbcType="VARCHAR" property="addressCity" />
+    <result column="address_area" jdbcType="VARCHAR" property="addressArea" />
+    <result column="address_street" jdbcType="VARCHAR" property="addressStreet" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="address_post_code" jdbcType="INTEGER" property="addressPostCode" />
+    <result column="address_recipient_name" jdbcType="VARCHAR" property="addressRecipientName" />
+    <result column="address_recipient_telno" jdbcType="BIGINT" property="addressRecipientTelno" />
+    <result column="is_default_address" jdbcType="INTEGER" property="isDefaultAddress" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    address_id, address_province, address_city, address_area, address_street, address_detail, 
+    address_post_code, address_recipient_name, address_recipient_telno, is_default_address, 
+    cust_id
+  </sql>
+  <select id="selectByExample" parameterType="com.crazyelemon.entity.ReceiveAddressExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from receive_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from receive_address
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from receive_address
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crazyelemon.entity.ReceiveAddressExample">
+    delete from receive_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crazyelemon.entity.ReceiveAddress">
+    insert into receive_address (address_id, address_province, address_city, 
+      address_area, address_street, address_detail, 
+      address_post_code, address_recipient_name, 
+      address_recipient_telno, is_default_address, 
+      cust_id)
+    values (#{addressId,jdbcType=INTEGER}, #{addressProvince,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR}, 
+      #{addressArea,jdbcType=VARCHAR}, #{addressStreet,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{addressPostCode,jdbcType=INTEGER}, #{addressRecipientName,jdbcType=VARCHAR}, 
+      #{addressRecipientTelno,jdbcType=BIGINT}, #{isDefaultAddress,jdbcType=INTEGER}, 
+      #{custId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crazyelemon.entity.ReceiveAddress">
+    insert into receive_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="addressProvince != null">
+        address_province,
+      </if>
+      <if test="addressCity != null">
+        address_city,
+      </if>
+      <if test="addressArea != null">
+        address_area,
+      </if>
+      <if test="addressStreet != null">
+        address_street,
+      </if>
+      <if test="addressDetail != null">
+        address_detail,
+      </if>
+      <if test="addressPostCode != null">
+        address_post_code,
+      </if>
+      <if test="addressRecipientName != null">
+        address_recipient_name,
+      </if>
+      <if test="addressRecipientTelno != null">
+        address_recipient_telno,
+      </if>
+      <if test="isDefaultAddress != null">
+        is_default_address,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addressId != null">
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="addressProvince != null">
+        #{addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressArea != null">
+        #{addressArea,jdbcType=VARCHAR},
+      </if>
+      <if test="addressStreet != null">
+        #{addressStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPostCode != null">
+        #{addressPostCode,jdbcType=INTEGER},
+      </if>
+      <if test="addressRecipientName != null">
+        #{addressRecipientName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressRecipientTelno != null">
+        #{addressRecipientTelno,jdbcType=BIGINT},
+      </if>
+      <if test="isDefaultAddress != null">
+        #{isDefaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crazyelemon.entity.ReceiveAddressExample" resultType="java.lang.Long">
+    select count(*) from receive_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update receive_address
+    <set>
+      <if test="record.addressId != null">
+        address_id = #{record.addressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressProvince != null">
+        address_province = #{record.addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressCity != null">
+        address_city = #{record.addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressArea != null">
+        address_area = #{record.addressArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressStreet != null">
+        address_street = #{record.addressStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressDetail != null">
+        address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressPostCode != null">
+        address_post_code = #{record.addressPostCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressRecipientName != null">
+        address_recipient_name = #{record.addressRecipientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressRecipientTelno != null">
+        address_recipient_telno = #{record.addressRecipientTelno,jdbcType=BIGINT},
+      </if>
+      <if test="record.isDefaultAddress != null">
+        is_default_address = #{record.isDefaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update receive_address
+    set address_id = #{record.addressId,jdbcType=INTEGER},
+      address_province = #{record.addressProvince,jdbcType=VARCHAR},
+      address_city = #{record.addressCity,jdbcType=VARCHAR},
+      address_area = #{record.addressArea,jdbcType=VARCHAR},
+      address_street = #{record.addressStreet,jdbcType=VARCHAR},
+      address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      address_post_code = #{record.addressPostCode,jdbcType=INTEGER},
+      address_recipient_name = #{record.addressRecipientName,jdbcType=VARCHAR},
+      address_recipient_telno = #{record.addressRecipientTelno,jdbcType=BIGINT},
+      is_default_address = #{record.isDefaultAddress,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crazyelemon.entity.ReceiveAddress">
+    update receive_address
+    <set>
+      <if test="addressProvince != null">
+        address_province = #{addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        address_city = #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressArea != null">
+        address_area = #{addressArea,jdbcType=VARCHAR},
+      </if>
+      <if test="addressStreet != null">
+        address_street = #{addressStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPostCode != null">
+        address_post_code = #{addressPostCode,jdbcType=INTEGER},
+      </if>
+      <if test="addressRecipientName != null">
+        address_recipient_name = #{addressRecipientName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressRecipientTelno != null">
+        address_recipient_telno = #{addressRecipientTelno,jdbcType=BIGINT},
+      </if>
+      <if test="isDefaultAddress != null">
+        is_default_address = #{isDefaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crazyelemon.entity.ReceiveAddress">
+    update receive_address
+    set address_province = #{addressProvince,jdbcType=VARCHAR},
+      address_city = #{addressCity,jdbcType=VARCHAR},
+      address_area = #{addressArea,jdbcType=VARCHAR},
+      address_street = #{addressStreet,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      address_post_code = #{addressPostCode,jdbcType=INTEGER},
+      address_recipient_name = #{addressRecipientName,jdbcType=VARCHAR},
+      address_recipient_telno = #{addressRecipientTelno,jdbcType=BIGINT},
+      is_default_address = #{isDefaultAddress,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER}
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+</mapper>

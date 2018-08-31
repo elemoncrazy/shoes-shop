@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crazyelemon.dao.CategoryDAO">
+  <resultMap id="BaseResultMap" type="com.crazyelemon.entity.Category">
+    <id column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_desc" jdbcType="VARCHAR" property="categoryDesc" />
+    <result column="category_create_time" jdbcType="DATE" property="categoryCreateTime" />
+    <result column="category_update_time" jdbcType="DATE" property="categoryUpdateTime" />
+    <result column="category_status" jdbcType="TINYINT" property="categoryStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    category_id, category_name, category_desc, category_create_time, category_update_time, 
+    category_status
+  </sql>
+  <select id="selectByExample" parameterType="com.crazyelemon.entity.CategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from category
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from category
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crazyelemon.entity.CategoryExample">
+    delete from category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crazyelemon.entity.Category">
+    insert into category (category_id, category_name, category_desc, 
+      category_create_time, category_update_time, category_status
+      )
+    values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryDesc,jdbcType=VARCHAR}, 
+      #{categoryCreateTime,jdbcType=DATE}, #{categoryUpdateTime,jdbcType=DATE}, #{categoryStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crazyelemon.entity.Category">
+    insert into category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="categoryName != null">
+        category_name,
+      </if>
+      <if test="categoryDesc != null">
+        category_desc,
+      </if>
+      <if test="categoryCreateTime != null">
+        category_create_time,
+      </if>
+      <if test="categoryUpdateTime != null">
+        category_update_time,
+      </if>
+      <if test="categoryStatus != null">
+        category_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryDesc != null">
+        #{categoryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCreateTime != null">
+        #{categoryCreateTime,jdbcType=DATE},
+      </if>
+      <if test="categoryUpdateTime != null">
+        #{categoryUpdateTime,jdbcType=DATE},
+      </if>
+      <if test="categoryStatus != null">
+        #{categoryStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crazyelemon.entity.CategoryExample" resultType="java.lang.Long">
+    select count(*) from category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update category
+    <set>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryName != null">
+        category_name = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryDesc != null">
+        category_desc = #{record.categoryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryCreateTime != null">
+        category_create_time = #{record.categoryCreateTime,jdbcType=DATE},
+      </if>
+      <if test="record.categoryUpdateTime != null">
+        category_update_time = #{record.categoryUpdateTime,jdbcType=DATE},
+      </if>
+      <if test="record.categoryStatus != null">
+        category_status = #{record.categoryStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update category
+    set category_id = #{record.categoryId,jdbcType=INTEGER},
+      category_name = #{record.categoryName,jdbcType=VARCHAR},
+      category_desc = #{record.categoryDesc,jdbcType=VARCHAR},
+      category_create_time = #{record.categoryCreateTime,jdbcType=DATE},
+      category_update_time = #{record.categoryUpdateTime,jdbcType=DATE},
+      category_status = #{record.categoryStatus,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crazyelemon.entity.Category">
+    update category
+    <set>
+      <if test="categoryName != null">
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryDesc != null">
+        category_desc = #{categoryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCreateTime != null">
+        category_create_time = #{categoryCreateTime,jdbcType=DATE},
+      </if>
+      <if test="categoryUpdateTime != null">
+        category_update_time = #{categoryUpdateTime,jdbcType=DATE},
+      </if>
+      <if test="categoryStatus != null">
+        category_status = #{categoryStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crazyelemon.entity.Category">
+    update category
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      category_desc = #{categoryDesc,jdbcType=VARCHAR},
+      category_create_time = #{categoryCreateTime,jdbcType=DATE},
+      category_update_time = #{categoryUpdateTime,jdbcType=DATE},
+      category_status = #{categoryStatus,jdbcType=TINYINT}
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </update>
+</mapper>
