@@ -26,12 +26,12 @@ public class Shoes implements Serializable {
     /**
      * 吊牌价
      */
-    private Float shoesPriceSale;
+    private Double shoesPriceSale;
 
     /**
      * 折扣
      */
-    private Float shoesDiscount;
+    private Double shoesDiscount;
 
     /**
      * 鞋描述
@@ -94,19 +94,19 @@ public class Shoes implements Serializable {
         this.shoesName = shoesName;
     }
 
-    public Float getShoesPriceSale() {
+    public Double getShoesPriceSale() {
         return shoesPriceSale;
     }
 
-    public void setShoesPriceSale(Float shoesPriceSale) {
+    public void setShoesPriceSale(Double shoesPriceSale) {
         this.shoesPriceSale = shoesPriceSale;
     }
 
-    public Float getShoesDiscount() {
+    public Double getShoesDiscount() {
         return shoesDiscount;
     }
 
-    public void setShoesDiscount(Float shoesDiscount) {
+    public void setShoesDiscount(Double shoesDiscount) {
         this.shoesDiscount = shoesDiscount;
     }
 
