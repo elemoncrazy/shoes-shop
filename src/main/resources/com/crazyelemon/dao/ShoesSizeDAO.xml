@@ -6,81 +6,9 @@
     <result column="shoes_size" jdbcType="REAL" property="shoesSize" />
     <result column="shoes_state" jdbcType="BIT" property="shoesState" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List">
     shoes_size_id, shoes_size, shoes_state
   </sql>
-  <select id="selectByExample" parameterType="com.crazyelemon.entity.ShoesSizeExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from shoes_size
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -90,12 +18,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from shoes_size
     where shoes_size_id = #{shoesSizeId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.crazyelemon.entity.ShoesSizeExample">
-    delete from shoes_size
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.crazyelemon.entity.ShoesSize">
     insert into shoes_size (shoes_size_id, shoes_size, shoes_state
@@ -128,38 +50,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.crazyelemon.entity.ShoesSizeExample" resultType="java.lang.Long">
-    select count(*) from shoes_size
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update shoes_size
-    <set>
-      <if test="record.shoesSizeId != null">
-        shoes_size_id = #{record.shoesSizeId,jdbcType=INTEGER},
-      </if>
-      <if test="record.shoesSize != null">
-        shoes_size = #{record.shoesSize,jdbcType=REAL},
-      </if>
-      <if test="record.shoesState != null">
-        shoes_state = #{record.shoesState,jdbcType=BIT},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update shoes_size
-    set shoes_size_id = #{record.shoesSizeId,jdbcType=INTEGER},
-      shoes_size = #{record.shoesSize,jdbcType=REAL},
-      shoes_state = #{record.shoesState,jdbcType=BIT}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.crazyelemon.entity.ShoesSize">
     update shoes_size
     <set>

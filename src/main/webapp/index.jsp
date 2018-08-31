@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Wangzh
+  User: kleis
   Date: 2018/8/31
   Time: 13:54
   To change this template use File | Settings | File Templates.
@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-    <p>My git test</p>
+
 </body>
 </html>
