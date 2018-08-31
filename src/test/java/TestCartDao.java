@@ -3,9 +3,10 @@ import com.crazyelemon.util.MyBatisUtil;
 import org.junit.Test;
 
 public class TestCartDao {
+    CartDAO cartDAO = MyBatisUtil.getSession().getMapper(CartDAO.class);
     @Test
     public void testSelectByPrimaryKey(){
-       CartDAO cartDAO = MyBatisUtil.getSession().getMapper(CartDAO.class);
-        System.out.println(cartDAO.selectByPrimaryKey(2));
+       System.out.println(cartDAO.selectByPrimaryKey(2));
+       MyBatisUtil.closeSession();
     }
 }

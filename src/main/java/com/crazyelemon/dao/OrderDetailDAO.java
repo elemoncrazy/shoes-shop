@@ -15,4 +15,10 @@ public interface OrderDetailDAO {
     int updateByPrimaryKeySelective(OrderDetail record);
 
     int updateByPrimaryKey(OrderDetail record);
+
+    /**
+     @param orderDetail 添加的新订单详情对象
+     @return 返回受影响行数
+     */
+    public  int saveDetails(OrderDetail orderDetail);
 }
