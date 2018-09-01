@@ -1,10 +1,15 @@
 package com.crazyelemon.entity;
 
+import com.crazyelemon.util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * shoes_size
- * @author 
+ *
+ * @author
  */
 public class ShoesSize implements Serializable {
     private Integer shoesSizeId;
@@ -39,6 +44,8 @@ public class ShoesSize implements Serializable {
         this.shoesState = shoesState;
     }
 
+
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -52,8 +59,8 @@ public class ShoesSize implements Serializable {
         }
         ShoesSize other = (ShoesSize) that;
         return (this.getShoesSizeId() == null ? other.getShoesSizeId() == null : this.getShoesSizeId().equals(other.getShoesSizeId()))
-            && (this.getShoesSize() == null ? other.getShoesSize() == null : this.getShoesSize().equals(other.getShoesSize()))
-            && (this.getShoesState() == null ? other.getShoesState() == null : this.getShoesState().equals(other.getShoesState()));
+                && (this.getShoesSize() == null ? other.getShoesSize() == null : this.getShoesSize().equals(other.getShoesSize()))
+                && (this.getShoesState() == null ? other.getShoesState() == null : this.getShoesState().equals(other.getShoesState()));
     }
 
     @Override

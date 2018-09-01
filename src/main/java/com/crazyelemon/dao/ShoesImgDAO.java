@@ -27,4 +27,6 @@ public interface ShoesImgDAO {
     int updateByPrimaryKeySelective(ShoesImg record);
 
     int updateByPrimaryKey(ShoesImg record);
+
+     List<ShoesImg> queryAllImgByShoesId(Integer shoesId);
 }

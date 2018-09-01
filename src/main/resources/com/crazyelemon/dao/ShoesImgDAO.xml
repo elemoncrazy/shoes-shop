@@ -193,4 +193,9 @@
       sort_no = #{sortNo,jdbcType=INTEGER}
     where img_id = #{imgId,jdbcType=INTEGER}
   </update>
+  <select id="queryAllImgByShoesId"  parameterType="java.lang.Integer" resultType="com.crazyelemon.entity.ShoesImg">
+    SELECT shoes_img.img_path
+    FROM shoes_img
+    WHERE shoes_id=#{shoesId}
+  </select>
 </mapper>

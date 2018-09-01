@@ -27,4 +27,6 @@ public interface ShoesColorDAO {
     int updateByPrimaryKeySelective(ShoesColor record);
 
     int updateByPrimaryKey(ShoesColor record);
+
+     List<ShoesColor> queryAllColorByShoesId(Integer shoesId);
 }

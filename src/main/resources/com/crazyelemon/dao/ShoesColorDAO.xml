@@ -178,4 +178,11 @@
       shoes_color_status = #{shoesColorStatus,jdbcType=BIT}
     where shoes_color_id = #{shoesColorId,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAllColorByShoesId" parameterType="java.lang.Integer" resultType="com.crazyelemon.entity.ShoesColor">
+    SELECT  shoes_color.shoes_color_name
+    FROM shoes_color JOIN shoes_detail
+    ON shoes_color.shoes_color_id = shoes_detail.shoes_color_id
+    WHERE shoes_detail.shoes_id = #{shoes_id}
+  </select>
 </mapper>

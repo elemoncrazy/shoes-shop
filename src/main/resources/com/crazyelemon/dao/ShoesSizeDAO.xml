@@ -178,4 +178,11 @@
       shoes_state = #{shoesState,jdbcType=BIT}
     where shoes_size_id = #{shoesSizeId,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAllSizeByShoesId" parameterType="java.lang.Integer" resultType="com.crazyelemon.entity.ShoesSize">
+    SELECT shoes_size.shoes_size
+    FROM shoes_size JOIN shoes_detail ON shoes_size.shoes_size_id = shoes_detail.shoes_size_id
+    WHERE shoes_detail.shoes_id = #{shoes_id}
+
+  </select>
 </mapper>

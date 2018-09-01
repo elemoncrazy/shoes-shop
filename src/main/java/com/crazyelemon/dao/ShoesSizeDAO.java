@@ -2,7 +2,9 @@ package com.crazyelemon.dao;
 
 import com.crazyelemon.entity.ShoesSize;
 import com.crazyelemon.entity.ShoesSizeExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ShoesSizeDAO {
@@ -27,4 +29,15 @@ public interface ShoesSizeDAO {
     int updateByPrimaryKeySelective(ShoesSize record);
 
     int updateByPrimaryKey(ShoesSize record);
+
+    /*
+        查询指定款式上的所有尺码
+
+       ```java
+        /**
+         @param shooesId 指定的鞋子ID
+         @return 返回指定鞋子的所有尺码
+         */
+    List<ShoesSize> queryAllSizeByShoesId(Integer shoesId);
+
 }
