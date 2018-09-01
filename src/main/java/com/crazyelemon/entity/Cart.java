@@ -22,6 +22,18 @@ public class Cart implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Cart() {
+    }
+
+    public Cart(Integer cartId, Integer custId, Integer shoesDetailId, String quality, Date addTime, Date updateTime) {
+        this.cartId = cartId;
+        this.custId = custId;
+        this.shoesDetailId = shoesDetailId;
+        this.quality = quality;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+    }
+
     public Integer getCartId() {
         return cartId;
     }

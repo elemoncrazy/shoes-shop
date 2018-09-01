@@ -306,4 +306,33 @@
       cust_id = #{custId,jdbcType=INTEGER}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateDefaultAddress" parameterType="com.crazyelemon.entity.ReceiveAddress">
+    update receive_address
+    set is_default_address = 1
+    where address_id = #{addressId,jdbcType=INTEGER}
+    and cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByCustId" parameterType="com.crazyelemon.entity.ReceiveAddress">
+    update receive_address
+    set address_province = #{address.addressProvince,jdbcType=VARCHAR},
+      address_city = #{address.addressCity,jdbcType=VARCHAR},
+      address_area = #{address.addressArea,jdbcType=VARCHAR},
+      address_street = #{address.addressStreet,jdbcType=VARCHAR},
+      address_detail = #{address.addressDetail,jdbcType=VARCHAR},
+      address_post_code = #{address.addressPostCode,jdbcType=INTEGER},
+      address_recipient_name = #{address.addressRecipientName,jdbcType=VARCHAR},
+      address_recipient_telno = #{address.addressRecipientTelno,jdbcType=BIGINT},
+      is_default_address = #{address.isDefaultAddress,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER}
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from receive_address
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </select>
 </mapper>

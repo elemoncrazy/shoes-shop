@@ -225,4 +225,36 @@
       update_time = #{updateTime,jdbcType=DATE}
     where cart_id = #{cartId,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteByShoesDetailId" parameterType="java.lang.Integer">
+    delete from cart
+    where shoes_detail_id = #{shoesDetailId,jdbcType=INTEGER}
+  </delete>
+
+  <update id="updateCount" parameterType="com.crazyelemon.entity.Cart">
+    update cart
+    set quality = #{quality,jdbcType=VARCHAR}
+    where shoes_detail_id = #{shoesDetailId,jdbcType=INTEGER}
+    and cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+
+<!--  <select id="queryAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+/*    select shoes_detail_id, shoes_id, shoes_color_id,
+    shoes_size_id, shoes_inventory, shoes_sale_count,
+    `status`
+    from shoes_detail
+    where shoes_detail_id = (select shoes_detail_id
+                              from cart
+                              where cust_id = #{custId,jdbcType=INTEGER})*/
+    select cart_id, cust_id, shoes_detail_id,
+      quality, add_time, update_time
+    from cart
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </select>-->
+  <select id="queryAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cart
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </select>
 </mapper>
