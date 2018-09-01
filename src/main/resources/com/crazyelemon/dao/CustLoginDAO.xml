@@ -114,4 +114,21 @@
       cust_id = #{custId,jdbcType=INTEGER}
     where login_id = #{loginId,jdbcType=INTEGER}
   </update>
+
+  <select id="checkTelnoAndPwd"  resultType="com.crazyelemon.entity.Customer">
+    select * from customer where cust_phone = #{telno} and cust_pwd = #{password}
+  </select>
+  <select id="checkEmailAndPwd" resultType="com.crazyelemon.entity.Customer">
+    select * from customer where cust_email = #{email} and cust_pwd = #{password}
+   </select>
+  <insert id="save" parameterType="com.crazyelemon.entity.CustLogin">
+    insert into cust_login (login_id, login_name, login_pwd,
+      login_time, login_ip, login_status,
+      cust_id)
+    values (#{loginId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR},
+      #{loginTime,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR}, #{loginStatus,jdbcType=INTEGER},
+      #{custId,jdbcType=INTEGER})
+  </insert>
+
+
 </mapper>

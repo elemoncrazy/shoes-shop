@@ -14,4 +14,11 @@ public interface CustomerDAO {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    Long isValidTelno(Long telno);
+
+    String isValidEmail(String email);
+
+    int updatePwd(Customer customer);
+
 }

@@ -104,4 +104,8 @@
       category_status = #{categoryStatus,jdbcType=TINYINT}
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAll" resultType="com.crazyelemon.entity.Category">
+    select * from category
+  </select>
 </mapper>

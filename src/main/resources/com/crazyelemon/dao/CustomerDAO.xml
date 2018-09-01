@@ -12,6 +12,11 @@
     <result column="cust_update_time" jdbcType="TIMESTAMP" property="custUpdateTime" />
     <result column="cust_profile" jdbcType="VARCHAR" property="custProfile" />
   </resultMap>
+  <resultMap id="tel" type="java.lang.Long">
+    <result column="cust_phone" jdbcType="BIGINT" property="custPhone" />
+  </resultMap>
+  <resultMap id="email" type="java.lang.String">
+    <result column="cust_email" jdbcType="VARCHAR" property="custEmail" />  </resultMap>
   <sql id="Base_Column_List">
     cust_id, cust_name, cust_pwd, cust_age, cust_phone, cust_email, cust_create_time, 
     cust_update_time, cust_profile
@@ -138,5 +143,16 @@
       cust_update_time = #{custUpdateTime,jdbcType=TIMESTAMP},
       cust_profile = #{custProfile,jdbcType=VARCHAR}
     where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="isValidTelno" parameterType="java.lang.Long" resultMap="tel">
+    select cust_phone from customer where cust_phone = #{telNo}
+  </select>
+
+  <select id="isValidEmail" parameterType="java.lang.String" resultMap="email">
+    select cust_email from customer where cust_email = #{email}
+  </select>
+  <update id="updatePwd" parameterType="com.crazyelemon.entity.Customer">
+      update customer set cust_pwd = #{custPwd} where cust_id = #{custId}
   </update>
 </mapper>

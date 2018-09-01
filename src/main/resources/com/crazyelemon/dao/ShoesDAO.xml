@@ -175,4 +175,30 @@
       category_id = #{categoryId,jdbcType=INTEGER}
     where shoes_id = #{shoesId,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAll" resultType="com.crazyelemon.entity.Shoes">
+    select * from shoes;
+  </select>
+
+  <select id="queryByName" parameterType="java.lang.String" resultType="com.crazyelemon.entity.Shoes">
+    select * from shoes where shoes_name = #{shoesName};
+  </select>
+
+  <select id="queryByGender" parameterType="java.lang.Integer" resultType="com.crazyelemon.entity.Shoes">
+    select * from shoes where shoes_gender = #{shoesGender};
+  </select>
+
+  <select id="queryBySize" parameterType="java.lang.Float" resultType="com.crazyelemon.entity.ShoesDetail">
+    select * from shoes_detail where shoes_size_id in (
+    select shoes_size_id from shoes_size where shoes_size = #{shoesSize}
+    );
+  </select>
+
+  <select id="queryByPrice" resultType="com.crazyelemon.entity.Shoes">
+    select * from shoes where shoes_price_sale between #{minPrice} and #{maxPrice}
+  </select>
+
+  <select id="queryByCategory" resultType="com.crazyelemon.entity.Shoes">
+    select * from shoes where category_id = #{categoryId}
+  </select>
 </mapper>

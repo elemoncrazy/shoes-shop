@@ -1,5 +1,7 @@
 package com.crazyelemon.entity;
 
+import lombok.AllArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,6 +9,7 @@ import java.util.Date;
  * cust_login
  * @author 
  */
+@AllArgsConstructor
 public class CustLogin implements Serializable {
     /**
      * 登录id
@@ -41,6 +44,8 @@ public class CustLogin implements Serializable {
     private Integer custId;
 
     private static final long serialVersionUID = 1L;
+
+    public CustLogin(){}
 
     public Integer getLoginId() {
         return loginId;
